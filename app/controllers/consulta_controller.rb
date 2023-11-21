@@ -46,6 +46,6 @@ class ConsultaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def consulta_params
-      params.require(:consulta).permit(:paciente_id, :medico_id, :data)
+      params.require(:consulta).permit(:paciente_id, :medico_id, :data, :medico_endereco)
     end
 end

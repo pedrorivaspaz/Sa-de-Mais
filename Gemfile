@@ -31,7 +31,6 @@ gem 'rollbar'
 gem 'pagy'
 gem 'pg'
 gem 'rails-i18n'
-gem 'tty-spinner'
 
 #Swagger documentation
 gem 'rswag'

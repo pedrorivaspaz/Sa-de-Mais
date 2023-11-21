@@ -6,6 +6,7 @@ class CreatePacientes < ActiveRecord::Migration[7.1]
       t.string :telefone
       t.string :cpf
       t.string :endereco
+      t.string :data_nascimento
 
       t.timestamps
     end

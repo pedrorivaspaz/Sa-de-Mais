@@ -1,0 +1,637 @@
+---
+openapi: 3.0.1
+info:
+  title: API Saúde Mais V1
+  version: v1
+paths:
+  "/medicos":
+    post:
+      summary: Cria médicos no sistema
+      tags:
+      - Médicos
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  example: Alexsandro Perreira da Silva
+                  description: Nome do médico
+                especialidade:
+                  type: string
+                  example: Cardiologista
+                  description: Especialidade do médico
+                email:
+                  type: string
+                  example: russ@walter-beer.test
+                  description: E-mail do médico
+                telefone:
+                  type: string
+                  example: 269-233-7639 19782
+                  description: Telefone para contato
+                crm:
+                  type: string
+                  example: '893673654911'
+                  description: CRM do médico
+                endereco:
+                  type: string
+                  example: 5785 Swift Throughway, New Nicolmouth
+                  description: Endereco do consultório
+    get:
+      summary: Lista medicos do sistema
+      tags:
+      - Médicos
+      parameters:
+      - name: page
+        in: query
+        description: Navega entre paginas para trazer os resultados paginados
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    description: Nome do Médico
+                    nullable: false
+                  especialidade:
+                    type: string
+                    description: Especialidade do Médico
+                    nullable: false
+                  email:
+                    type: string
+                    description: E-mail do Médico
+                    nullable: false
+                  telefone:
+                    type: string
+                    description: Telefone para contato
+                  crm:
+                    type: string
+                    description: CRM do médico
+                  endereco:
+                    type: string
+                    description: Endereço do consultório
+                example:
+                - id: 1
+                  nome: Pedro Vasconcelos
+                  especialidade: Cardiologista
+                  email: russ@walter-beer.test
+                  telefone: 269-233-7639 19782
+                  crm: '8742560'
+                  endereco: 5785 Swift Throughway, New Nicolmouth, RI 95893-9831
+                  data_nascimento: 28/02/1936
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
+  "/medicos/{id}":
+    delete:
+      summary: Deleta médicos do sistema
+      tags:
+      - Médicos
+      parameters:
+      - name: id
+        in: path
+        description: 'Parâmetro ID '
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: deleted
+        '404':
+          description: not found
+    put:
+      summary: Atualiza médicos do sistema
+      tags:
+      - Médicos
+      parameters:
+      - name: id
+        in: path
+        description: Parâmetro ID para filtrar médicos
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    example: Alexsandro Perreira da Silva
+                    description: Nome do médico
+                  especialidade:
+                    type: string
+                    example: Cardiologista
+                    description: Especialidade do médico
+                  email:
+                    type: string
+                    example: russ@walter-beer.test
+                    description: E-mail do médico
+                  telefone:
+                    type: string
+                    example: 269-233-7639 19782
+                    description: Telefone para contato
+                  crm:
+                    type: string
+                    example: '893673654911'
+                    description: CRM do médico
+                  endereco:
+                    type: string
+                    example: 5785 Swift Throughway, New Nicolmouth
+                    description: Endereco do consultório
+                example:
+                - id: 1
+                  nome: Pedro Vasconcelos
+                  especialidade: Cardiologista
+                  email: russ@walter-beer.test
+                  telefone: 269-233-7639 19782
+                  crm: '8742560'
+                  endereco: 5785 Swift Throughway, New Nicolmouth, RI 95893-9831
+                  data_nascimento: 28/02/1936
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
+  "/medicos/search?especialidade={especialidade}":
+    get:
+      summary: Busca médicos do sistema pela especialidade
+      tags:
+      - Médicos
+      parameters:
+      - name: especialidade
+        in: query
+        description: Especialidade do médico
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Navega entre paginas para trazer os resultados paginados
+        required: false
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: not_found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example: {}
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    description: Nome do Médico
+                    nullable: false
+                  especialidade:
+                    type: string
+                    description: Especialidade do Médico
+                    nullable: false
+                  email:
+                    type: string
+                    description: E-mail do Médico
+                    nullable: false
+                  telefone:
+                    type: string
+                    description: Telefone para contato
+                  crm:
+                    type: string
+                    description: CRM do médico
+                  endereco:
+                    type: string
+                    description: Endereço do consultório
+                example:
+                - id: 1
+                  nome: Pedro Vasconcelos
+                  especialidade: Cardiologista
+                  email: russ@walter-beer.test
+                  telefone: 269-233-7639 19782
+                  crm: '8742560'
+                  endereco: 5785 Swift Throughway, New Nicolmouth, RI 95893-9831
+                  data_nascimento: 28/02/1936
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
+  "/medicos/search?nome={nome}":
+    get:
+      summary: Busca médicos do sistema pelo nome
+      tags:
+      - Médicos
+      parameters:
+      - name: nome
+        in: query
+        description: Nome do médico
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Navega entre paginas para trazer os resultados paginados
+        required: false
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: not_found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example: {}
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    description: Nome do Médico
+                    nullable: false
+                  especialidade:
+                    type: string
+                    description: Especialidade do Médico
+                    nullable: false
+                  email:
+                    type: string
+                    description: E-mail do Médico
+                    nullable: false
+                  telefone:
+                    type: string
+                    description: Telefone para contato
+                  crm:
+                    type: string
+                    description: CRM do médico
+                  endereco:
+                    type: string
+                    description: Endereço do consultório
+                example:
+                - id: 1
+                  nome: Pedro Vasconcelos
+                  especialidade: Cardiologista
+                  email: russ@walter-beer.test
+                  telefone: 269-233-7639 19782
+                  crm: '8742560'
+                  endereco: 5785 Swift Throughway, New Nicolmouth, RI 95893-9831
+                  data_nascimento: 28/02/1936
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
+  "/pacientes":
+    post:
+      summary: Cria pacientes no sistema
+      tags:
+      - Pacientes
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  example: Alexsandro Perreira da Silva
+                  description: Nome do paciente
+                email:
+                  type: string
+                  example: russ@walter-beer.test
+                  description: E-mail do paciente
+                telefone:
+                  type: string
+                  example: 269-233-7639 19782
+                  description: Telefone para contato
+                cpf:
+                  type: string
+                  example: '893673654911'
+                  description: CPF do paciente
+                endereco:
+                  type: string
+                  example: 5785 Swift Throughway, New Nicolmouth
+                  description: Endereco do paciente
+                data_nascimento:
+                  type: string
+                  example: 28/02/1936
+                  description: Data de nascimento do paciente
+    get:
+      summary: Lista pacientes do sistema
+      tags:
+      - Pacientes
+      parameters:
+      - name: page
+        in: query
+        description: Navega entre paginas para trazer os resultados paginados
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    description: Nome do paciente
+                    nullable: false
+                  email:
+                    type: string
+                    description: E-mail do paciente
+                    nullable: false
+                  telefone:
+                    type: string
+                    description: Telefone para contato
+                  cpf:
+                    type: string
+                    description: CPF do paciente
+                  endereco:
+                    type: string
+                    description: Endereço do paciente
+                  data_nascimento:
+                    type: string
+                    description: Data de nascimento do paciente
+                example:
+                - id: 1
+                  nome: João da Silva
+                  email: russ@walter-beer.test
+                  telefone: 269-233-7639 19782
+                  cpf: '893673654911'
+                  endereco: 5785 Swift Throughway, New Nicolmouth, RI 95893-9831
+                  data_nascimento: 28/02/1936
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
+  "/pacientes/{id}":
+    delete:
+      summary: Deleta pacientes do sistema
+      tags:
+      - Pacientes
+      parameters:
+      - name: id
+        in: path
+        description: 'Parâmetro ID '
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: deleted
+        '404':
+          description: not found
+    put:
+      summary: Atualiza pacientes do sistema
+      tags:
+      - Pacientes
+      parameters:
+      - name: id
+        in: path
+        description: Parâmetro ID para filtrar pacientes
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    example: Alexsandro Perreira da Silva
+                    description: Nome do paciente
+                  email:
+                    type: string
+                    example: russ@walter-beer.test
+                    description: E-mail do paciente
+                  telefone:
+                    type: string
+                    example: 269-233-7639 19782
+                    description: Telefone para contato
+                  cpf:
+                    type: string
+                    example: '893673654911'
+                    description: CPF do paciente
+                  endereco:
+                    type: string
+                    example: 5785 Swift Throughway, New Nicolmouth
+                    description: Endereco do paciente
+                  data_nascimento:
+                    type: string
+                    example: 28/02/1936
+                    description: Data de nascimento do paciente
+                example:
+                - id: 1
+                  nome: João da Silva
+                  email: russ@walter-beer.test
+                  telefone: 269-233-7639 19782
+                  cpf: '893673654911'
+                  endereco: 5785 Swift Throughway, New Nicolmouth, RI 95893-9831
+                  data_nascimento: 28/02/1936
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
+    get:
+      summary: Busca pacientes do sistema pelo ID
+      tags:
+      - Pacientes
+      parameters:
+      - name: id
+        in: path
+        description: ID unico incremental do registro na tabela
+        required: true
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: not_found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example:
+                  error: Registro não encontrado
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    example: Alexsandro Perreira da Silva
+                    description: Nome do paciente
+                  email:
+                    type: string
+                    example: russ@walter-beer.test
+                    description: E-mail do paciente
+                  telefone:
+                    type: string
+                    example: 269-233-7639 19782
+                    description: Telefone para contato
+                  cpf:
+                    type: string
+                    example: '893673654911'
+                    description: CPF do paciente
+                  endereco:
+                    type: string
+                    example: 5785 Swift Throughway, New Nicolmouth
+                    description: Endereco do paciente
+                  data_nascimento:
+                    type: string
+                    example: 28/02/1936
+                    description: Data de nascimento do paciente
+                example:
+                - id: 1
+                  nome: João da Silva
+                  email: russ@walter-beer.test
+                  telefone: 269-233-7639 19782
+                  cpf: '893673654911'
+                  endereco: 5785 Swift Throughway, New Nicolmouth, RI 95893-9831
+                  data_nascimento: 28/02/1936
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
+  "/pacientes/search?nome={nome}":
+    get:
+      summary: Busca pacientes do sistema pelo nome
+      tags:
+      - Pacientes
+      parameters:
+      - name: nome
+        in: query
+        description: Nome do paciente
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Navega entre paginas para trazer os resultados paginados
+        required: false
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: not_found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example: {}
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    description: Nome do paciente
+                    nullable: false
+                  email:
+                    type: string
+                    description: E-mail do paciente
+                    nullable: false
+                  telefone:
+                    type: string
+                    description: Telefone para contato
+                  cpf:
+                    type: string
+                    description: CPF do paciente
+                  endereco:
+                    type: string
+                    description: Endereço do paciente
+                  data_nascimento:
+                    type: string
+                    description: Data de nascimento do paciente
+                example:
+                - id: 1
+                  nome: João da Silva
+                  email: russ@walter-beer.test
+                  telefone: 269-233-7639 19782
+                  cpf: '893673654911'
+                  endereco: 5785 Swift Throughway, New Nicolmouth, RI 95893-9831
+                  data_nascimento: 28/02/1936
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
+servers:
+- url: http://localhost:3000
+  description: Url do ambiente local
+- url: xpto
+  description: Url do ambiente de produção
+components:
+  schemas:
+    pagination:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Devolve os registros em uma lista
+          items: []
+        page:
+          type: integer
+          description: 'Pagina atual, possivel navegar entre pagina trocando os parametros,
+            ex: page=1, page=2, page=n'
+        per_page:
+          type: integer
+          description: 'Quantidade de registros por página, máximo: 1000, ex: per_page=20,
+            per_page=200'

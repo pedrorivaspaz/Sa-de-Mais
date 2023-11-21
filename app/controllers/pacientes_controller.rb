@@ -1,11 +1,18 @@
 class PacientesController < ApplicationController
+  include Pagy::Backend
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
+  
   before_action :set_paciente, only: %i[ show update destroy ]
+  before_action :load_pacientes, only: [:index, :search]
 
   # GET /pacientes
   def index
-    @pacientes = Paciente.all
-
-    render json: @pacientes
+    begin
+      pagy, @pacientes = pagy(Paciente.order(:id), items: 20)
+      render json: @pacientes
+    rescue Pagy::OverflowError
+      render json: { error: "A página procurada não existe." }, status: :not_found
+    end
   end
 
   # GET /pacientes/1
@@ -35,13 +42,31 @@ class PacientesController < ApplicationController
 
   # DELETE /pacientes/1
   def destroy
-    @paciente.destroy!
+    @paciente.destroy
+    render json: {message: 'Registro deletado com sucesso'}
+  end
+
+  def search
+    if params[:nome].present?
+      @pacientes = Paciente.search_by_nome(params[:nome])
+      render json: @pacientes
+    else
+      render json: { error: 'Nome não fornecido' }, status: :unprocessable_entity
+      return
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_paciente
-      @paciente = Paciente.find(params[:id])
+      @paciente = Paciente.find_by(id: params[:id])
+      unless @paciente
+        render json: { error: 'Registro não encontrado' }, status: :not_found
+      end
+    end
+
+    def load_pacientes
+      @pacientes = Paciente.all
     end
 
     # Only allow a list of trusted parameters through.

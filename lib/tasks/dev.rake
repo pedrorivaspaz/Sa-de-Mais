@@ -11,22 +11,26 @@ namespace :dev do
 
   desc "Adiciona pacientes"
   task add_pacientes: :environment do
-    10.times do
+    30.times do
       Paciente.create!(
         nome: Faker::Name.name,
         email: Faker::Internet.email,
         telefone: Faker::PhoneNumber.phone_number,
         cpf: Faker::Number.unique.number(digits: 11),
-        endereco: Faker::Address.full_address
+        endereco: Faker::Address.full_address,
+        data_nascimento: Faker::Date.birthday(min_age: 18, max_age: 90).strftime("%d/%m/%Y")
       )
     end
   end
 
   desc "Adiciona médicos"
   task add_medicos: :environment do
-    10.times do
+    30.times do
+      especialidades = ['Cardiologista', 'Ortopedista', 'Dermatologista', 'Clínico Geral', 'Pediatra']
+
       Medico.create!(
         nome: Faker::Name.name,
+        especialidade: especialidades.sample,
         email: Faker::Internet.email,
         telefone: Faker::PhoneNumber.phone_number,
         crm: Faker::Number.unique.number(digits: 7),
@@ -37,6 +41,19 @@ namespace :dev do
 
   desc "Adiciona consultas"
   task add_consultas: :environment do
+    pacientes = Paciente.all.to_a
+    medicos = Medico.all.to_a
 
+    40.times do
+      paciente = pacientes.sample
+      medico = medicos.sample
+
+      Consulta.create!(
+        paciente: paciente,
+        medico: medico,
+        data: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now),
+        local: medico.endereco
+      )
+    end
   end
 end

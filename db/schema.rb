@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_222842) do
     t.integer "paciente_id", null: false
     t.integer "medico_id", null: false
     t.datetime "data"
+    t.string "local"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["medico_id"], name: "index_consulta_on_medico_id"
@@ -23,6 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_222842) do
 
   create_table "medicos", force: :cascade do |t|
     t.string "nome"
+    t.string "especialidade"
     t.string "email"
     t.string "telefone"
     t.string "crm"
@@ -37,6 +39,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_222842) do
     t.string "telefone"
     t.string "cpf"
     t.string "endereco"
+    t.string "data_nascimento"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
