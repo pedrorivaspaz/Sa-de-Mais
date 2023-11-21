@@ -47,41 +47,42 @@ RSpec.describe '/pacientes/{id}', type: :request do
             nome: {
               type: :string,
               example: 'Alexsandro Perreira da Silva',
-              description: 'Nome do paciente'
+              description: 'Nome do médico'
+            },
+            especialidade: {
+              type: :string,
+              example: 'Cardiologista',
+              description: 'Especialidade do médico'
             },
             email: {
               type: :string,
               example: 'russ@walter-beer.test',
-              description: 'E-mail do paciente'
+              description: 'E-mail do médico'
             },
             telefone: {
               type: :string,
               example: '269-233-7639 19782',
               description: 'Telefone para contato'
             },
-            cpf: {
+            crm: {
               type: :string,
               example: '893673654911',
-              description: 'CPF do paciente'
+              description: 'CRM do médico'
             },
             endereco: {
               type: :string,
               example: '5785 Swift Throughway, New Nicolmouth',
-              description: 'Endereco do paciente'
-            },
-            data_nascimento: {
-              type: :string,
-              example: '28/02/1936',
-              description: 'Data de nascimento do paciente'
+              description: 'Endereco do consultório'
             }
           },
           example: [
             {
               "id": 1,
-              "nome": "João da Silva",
+              "nome": "Pedro Vasconcelos",
+              "especialidade": "Cardiologista",
               "email": "russ@walter-beer.test",
               "telefone": "269-233-7639 19782",
-              "cpf": "893673654911",
+              "crm": "8742560",
               "endereco": "5785 Swift Throughway, New Nicolmouth, RI 95893-9831",
               "data_nascimento": "28/02/1936",
               "created_at": "20/05/2022 14:30:22",

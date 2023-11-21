@@ -14,6 +14,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_222842) do
   create_table "consulta", force: :cascade do |t|
     t.integer "paciente_id", null: false
     t.integer "medico_id", null: false
+    t.string "paciente_nome"
+    t.string "medico_nome"
+    t.string "especialidade"
     t.datetime "data"
     t.string "local"
     t.datetime "created_at", null: false
