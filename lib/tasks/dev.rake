@@ -11,7 +11,7 @@ namespace :dev do
 
   desc "Adiciona pacientes"
   task add_pacientes: :environment do
-    50.times do
+    120.times do
       Paciente.create!(
         nome: Faker::Name.name,
         email: Faker::Internet.email,
@@ -25,7 +25,7 @@ namespace :dev do
 
   desc "Adiciona médicos"
   task add_medicos: :environment do
-    30.times do
+    200.times do
       especialidades = ['Cardiologista', 'Ortopedista', 'Dermatologista', 'Clínico Geral', 'Pediatra']
 
       Medico.create!(
@@ -44,7 +44,7 @@ namespace :dev do
     pacientes = Paciente.all.to_a
     medicos = Medico.all.to_a
 
-    40.times do
+    300.times do
       paciente = pacientes.sample
       medico = medicos.sample
 
