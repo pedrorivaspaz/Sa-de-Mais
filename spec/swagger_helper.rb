@@ -30,7 +30,7 @@ RSpec.configure do |config|
           description: 'Url do ambiente local'
         },
         {
-          url: 'xpto',
+          url: 'https://saude-mais.up.railway.app',
           description: 'Url do ambiente de produção'
         }
       ],
