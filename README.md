@@ -1,24 +1,53 @@
-# README
+# Saúde Mais API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API feita e documentada visando a relação entre médicos e pacientes
 
-Things you may want to cover:
+Projeto feito em rails com fins acadêmicos para a FIAP
 
-* Ruby version
+## Dependências
 
-* System dependencies
+Docker instalado no host.
 
-* Configuration
+## Como configurar o projeto
 
-* Database creation
+- Verifica as dependências
+- Instala variáveis de ambiente
+- Build do container
 
-* Database initialization
+```
+$ ./configure.sh
+```
 
-* How to run the test suite
+#### Recomendações para IDE
 
-* Services (job queues, cache servers, search engines, etc.)
+##### **VSCode**
 
-* Deployment instructions
+## Após instalar o docker
 
-* ...
+```
+$ docker-compose build
+```
+
+
+## Como iniciar o docker
+
+```
+$ service docker start
+```
+
+## Como subir o projeto
+
+```
+$ docker-compose up
+```
+
+## Como executar os testes
+
+```
+$ docker-compose run --rm rspec
+```
+
+## Tecnologias
+
+- Rails
+- Docker

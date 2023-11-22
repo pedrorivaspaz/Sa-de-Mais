@@ -563,6 +563,73 @@ paths:
                   data_nascimento: 28/02/1936
                   created_at: 20/05/2022 14:30:22
                   updated_at: 22/05/2022 09:15:37
+    get:
+      summary: Busca médicos do sistema pelo ID
+      tags:
+      - Médicos
+      parameters:
+      - name: id
+        in: path
+        description: ID unico incremental do registro na tabela
+        required: true
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: not_found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example:
+                  error: Registro não encontrado
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    example: Alexsandro Perreira da Silva
+                    description: Nome do médico
+                  especialidade:
+                    type: string
+                    example: Cardiologista
+                    description: Especialidade do médico
+                  email:
+                    type: string
+                    example: russ@walter-beer.test
+                    description: E-mail do médico
+                  telefone:
+                    type: string
+                    example: 269-233-7639 19782
+                    description: Telefone para contato
+                  crm:
+                    type: string
+                    example: '893673654911'
+                    description: CRM do médico
+                  endereco:
+                    type: string
+                    example: 5785 Swift Throughway, New Nicolmouth
+                    description: Endereco do consultório
+                example:
+                - id: 1
+                  nome: Pedro Vasconcelos
+                  especialidade: Cardiologista
+                  email: russ@walter-beer.test
+                  telefone: 269-233-7639 19782
+                  crm: '8742560'
+                  endereco: 5785 Swift Throughway, New Nicolmouth, RI 95893-9831
+                  data_nascimento: 28/02/1936
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
   "/medicos/search?especialidade={especialidade}":
     get:
       summary: Busca médicos do sistema pela especialidade
@@ -905,10 +972,6 @@ paths:
                     type: string
                     example: Alexsandro Perreira da Silva
                     description: Nome do paciente
-                  especialidade:
-                    type: string
-                    example: Cardiologista
-                    description: Especialidade do médico
                   email:
                     type: string
                     example: russ@walter-beer.test
@@ -917,18 +980,14 @@ paths:
                     type: string
                     example: 269-233-7639 19782
                     description: Telefone para contato
-                  crm:
-                    type: string
-                    example: '893673654911'
-                    description: CRM do médico
-                  endereco:
-                    type: string
-                    example: 5785 Swift Throughway, New Nicolmouth
-                    description: Endereco do paciente
                   cpf:
                     type: string
                     example: '893673654911'
                     description: CPF do paciente
+                  endereco:
+                    type: string
+                    example: 5785 Swift Throughway, New Nicolmouth
+                    description: Endereco do paciente
                   data_nascimento:
                     type: string
                     example: 28/02/1936

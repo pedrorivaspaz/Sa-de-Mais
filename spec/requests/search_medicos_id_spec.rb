@@ -1,12 +1,12 @@
 require 'swagger_helper'
 
 # to update api-doc: bundle exec rake rswag:specs:swaggerize
-RSpec.describe '/pacientes/{id}', type: :request do
+RSpec.describe '/medicos/{id}', type: :request do
 
  
-  path '/pacientes/{id}' do
-    get('Busca pacientes do sistema pelo ID') do
-      tags 'Pacientes'
+  path '/medicos/{id}' do
+    get('Busca médicos do sistema pelo ID') do
+      tags 'Médicos'
       consumes 'application/json'
       produces 'application/json'
       parameter name: :id,
@@ -28,7 +28,7 @@ RSpec.describe '/pacientes/{id}', type: :request do
       end
 
       response 200, 'successful' do
-        let!(:id) { create(:paciente).id }
+        let!(:id) { create(:medico).id }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
