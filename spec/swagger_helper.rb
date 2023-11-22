@@ -26,12 +26,12 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'http://localhost:3000',
-          description: 'Url do ambiente local'
+          url: 'https://saude-mais.up.railway.app',
+          description: 'Url do ambiente de produção'          
         },
         {
-          url: 'https://saude-mais.up.railway.app',
-          description: 'Url do ambiente de produção'
+          url: 'http://localhost:3000',
+          description: 'Url do ambiente local'            
         }
       ],
       components: {
