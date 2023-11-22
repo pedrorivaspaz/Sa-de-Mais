@@ -5,12 +5,14 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
- Rails.application.config.middleware.insert_before 0, Rack::Cors do
-   allow do
-     origins "example.com"
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins "http://localhost:3000", "sa-de-mais-production.up.railway.app"
 
-     resource "*",
-       headers: :any,
-       methods: [:get, :post, :put, :patch, :delete, :options, :head]
-   end
- end
+    resource "*",
+      headers: :any,
+      expose: ["Authorization"],
+      methods: [:get, :post, :put, :patch, :delete, :options, :head],
+      credentials: true
+  end
+end
