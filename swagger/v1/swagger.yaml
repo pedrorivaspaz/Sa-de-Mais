@@ -189,6 +189,152 @@ paths:
                   local: 9151 Maxima Ranch, Haagland, AR 15975-1803
                   created_at: '2023-11-21T17:59:21.181Z'
                   updated_at: '2023-11-21T17:59:21.181Z'
+  "/consulta/search?medico_nome={medico_nome}":
+    get:
+      summary: Busca consultas do sistema pelo nome do médico
+      tags:
+      - Consultas
+      parameters:
+      - name: medico_nome
+        in: query
+        description: Nome do médico
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Navega entre paginas para trazer os resultados paginados
+        required: false
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: not_found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example: {}
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  paciente_id:
+                    type: string
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  medico_id:
+                    type: string
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  paciente_nome:
+                    type: string
+                    description: Nome do Paciente
+                    nullable: false
+                  medico_nome:
+                    type: string
+                    description: Nome do Médico
+                  especialidade:
+                    type: string
+                    description: Especialidade do Médico
+                  data:
+                    type: string
+                    description: Data da Consulta
+                  local:
+                    type: string
+                    description: Endereço da Consulta
+                example:
+                - id: 3
+                  paciente_id: 7
+                  medico_id: 29
+                  paciente_nome: Treena Jaskolski
+                  medico_nome: Marlin Murray
+                  especialidade: Dermatologista
+                  data: '2023-11-21 04:13:55'
+                  local: 9151 Maxima Ranch, Haagland, AR 15975-1803
+                  created_at: '2023-11-21T17:59:21.181Z'
+                  updated_at: '2023-11-21T17:59:21.181Z'
+  "/consulta/search?paciente_nome={paciente_nome}":
+    get:
+      summary: Busca consultas do sistema pelo nome do paciente
+      tags:
+      - Consultas
+      parameters:
+      - name: paciente_nome
+        in: query
+        description: Nome do paciente
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Navega entre paginas para trazer os resultados paginados
+        required: false
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: not_found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example: {}
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  paciente_id:
+                    type: string
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  medico_id:
+                    type: string
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  paciente_nome:
+                    type: string
+                    description: Nome do Paciente
+                    nullable: false
+                  medico_nome:
+                    type: string
+                    description: Nome do Médico
+                  especialidade:
+                    type: string
+                    description: Especialidade do Médico
+                  data:
+                    type: string
+                    description: Data da Consulta
+                  local:
+                    type: string
+                    description: Endereço da Consulta
+                example:
+                - id: 3
+                  paciente_id: 7
+                  medico_id: 29
+                  paciente_nome: Treena Jaskolski
+                  medico_nome: Marlin Murray
+                  especialidade: Dermatologista
+                  data: '2023-11-21 04:13:55'
+                  local: 9151 Maxima Ranch, Haagland, AR 15975-1803
+                  created_at: '2023-11-21T17:59:21.181Z'
+                  updated_at: '2023-11-21T17:59:21.181Z'
   "/consultas/{id}":
     put:
       summary: Atualiza consultas do sistema
@@ -868,7 +1014,7 @@ paths:
 servers:
 - url: http://localhost:3000
   description: Url do ambiente local
-- url: xpto
+- url: https://saude-mais.up.railway.app
   description: Url do ambiente de produção
 components:
   schemas:

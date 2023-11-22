@@ -1,18 +1,18 @@
 require 'swagger_helper'
 
 # to update api-doc: bundle exec rake rswag:specs:swaggerize
-RSpec.describe '/medicos/search?especialidade={especialidade}', type: :request do
+RSpec.describe '/consulta/search?paciente_nome={paciente_nome}', type: :request do
 
  
-  path '/medicos/search?especialidade={especialidade}' do
-    get('Busca médicos do sistema pela especialidade') do
-      tags 'Médicos'
+  path '/consulta/search?paciente_nome={paciente_nome}' do
+    get('Busca consultas do sistema pelo nome do paciente') do
+      tags 'Consultas'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :especialidade,
+      parameter name: :paciente_nome,
                 in: :query,
                 type: :string,
-                description: 'Especialidade do médico',
+                description: 'Nome do paciente',
                 required: true
 
       parameter name: :page,
@@ -33,7 +33,7 @@ RSpec.describe '/medicos/search?especialidade={especialidade}', type: :request d
       end
 
       response 200, 'successful' do
-        let!(:especialidade) { create(:medico).id }
+        let!(:paciente_nome) { create(:consulta).id }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -41,7 +41,7 @@ RSpec.describe '/medicos/search?especialidade={especialidade}', type: :request d
             }
           }
         end
-        
+
         schema type: :object,
           properties: {
             id: {
@@ -49,46 +49,50 @@ RSpec.describe '/medicos/search?especialidade={especialidade}', type: :request d
               description: 'ID unico incremental do registro na tabela',
               nullable: false
             },
-            nome: {
+            paciente_id: {
+              type: :string,
+              description: 'ID unico incremental do registro na tabela',
+              nullable: false
+            },
+            medico_id: {
+              type: :string,
+              description: 'ID unico incremental do registro na tabela',
+              nullable: false
+            },
+            paciente_nome: {
+              type: :string,
+              description: 'Nome do Paciente',
+              nullable: false
+            },
+           medico_nome: {
               type: :string,
               description: 'Nome do Médico',
-              nullable: false
             },
             especialidade: {
               type: :string,
-              description: 'Especialidade do Médico',
-              nullable: false
+              description: 'Especialidade do Médico'
             },
-            email: {
+            data: {
               type: :string,
-              description: 'E-mail do Médico',
-              nullable: false
+              description: 'Data da Consulta'
             },
-           telefone: {
+            local: {
               type: :string,
-              description: 'Telefone para contato',
-            },
-            crm: {
-              type: :string,
-              description: 'CRM do médico'
-            },
-          endereco: {
-              type: :string,
-              description: 'Endereço do consultório'
+              description: 'Endereço da Consulta'
             }
           },
           example: [
             {
-              "id": 1,
-              "nome": "Pedro Vasconcelos",
-              "especialidade": "Cardiologista",
-              "email": "russ@walter-beer.test",
-              "telefone": "269-233-7639 19782",
-              "crm": "8742560",
-              "endereco": "5785 Swift Throughway, New Nicolmouth, RI 95893-9831",
-              "data_nascimento": "28/02/1936",
-              "created_at": "20/05/2022 14:30:22",
-              "updated_at": "22/05/2022 09:15:37"
+              "id": 3,
+              "paciente_id": 7,
+              "medico_id": 29,
+              "paciente_nome": "Treena Jaskolski",
+              "medico_nome": "Marlin Murray",
+              "especialidade": "Dermatologista",
+              "data": "2023-11-21 04:13:55",
+              "local": "9151 Maxima Ranch, Haagland, AR 15975-1803",
+              "created_at": "2023-11-21T17:59:21.181Z",
+              "updated_at": "2023-11-21T17:59:21.181Z"
             }
           ]
         run_test!
